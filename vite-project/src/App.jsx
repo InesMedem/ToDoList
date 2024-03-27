@@ -1,24 +1,20 @@
 import { useState } from "react";
 import "./App.css";
+import NewTodoForm from "./NewTodoForm";
 
 export default function App() {
-  const [newItem, setNewItem] = useState("hihusduif");
   const [todos, setTodos] = useState([]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // prevents the default behavior, to reload the page
-
+  const addTodo = (title) => {
     setTodos((currentTodos) => {
       // updates the state variable todos using setTodos
       // takes the previous state of todos (currentTodos) and appends a new todo item to it
 
       return [
         ...currentTodos,
-        { id: crypto.randomUUID(), title: newItem, completed: false },
+        { id: crypto.randomUUID(), title, completed: false },
       ];
     });
-    setNewItem("");
   };
 
   const toggleTodo = (id, completed) => {
@@ -40,18 +36,7 @@ export default function App() {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="new-item-form">
-        <div className="form-row">
-          <label> New Item</label>
-          <input
-            value={newItem}
-            onChange={(e) => setNewItem(e.target.value)}
-            type="text"
-            id="item"
-          />
-        </div>
-        <button className="btn">Add</button>
-      </form>
+      <NewTodoForm addTodo={addTodo} />
       <h1 className="header">Todo list</h1>
       <ul className="list">
         {todos.length === 0 && "No Todos"}
