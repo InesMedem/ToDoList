@@ -1,9 +1,40 @@
+import { useState } from "react";
 import "./App.css";
 
 export default function App() {
+  const [newItem, setNewItem] = useState("hihusduif");
+
   return (
     <>
-      <form>hii </form>
+      <form className="new-item-form">
+        <div className="form-row">
+          <label> New Item</label>
+          <input
+            value={newItem}
+            onChange={(e) => setNewItem(e.target.value)}
+            type="text"
+            id="item"
+          />
+        </div>
+        <button className="btn">Add</button>
+      </form>
+      <h1 className="header">Todo list</h1>
+      <ul className="list">
+        <li>
+          <label>
+            <input type="checkbox" />
+            Item 1
+          </label>
+          <button className="btn btn-danger">delete</button>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" />
+            Item 2
+          </label>
+          <button className="btn btn-danger">delete</button>
+        </li>
+      </ul>
     </>
   );
 }
